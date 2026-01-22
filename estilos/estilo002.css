@@ -17,7 +17,7 @@ header > h1 {
     color: white;
     padding-top: 40px;  
     margin: 0px;
-    font-size: clamp(3vw, 4vh, 5vh);
+    font-size: clamp(1.5em, 2em, 4em);
 }
 
 .logo {
