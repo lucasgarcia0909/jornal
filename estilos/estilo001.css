@@ -39,7 +39,6 @@ nav {
     padding: 6px;
 }
 nav p {
-    font-size: clamp(0.5em, 1em, 5em);
     text-align: center;
     color: white;
 }
