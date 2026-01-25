@@ -45,9 +45,9 @@ nav p {
     padding-right: 5px;
 }
 nav a {
-    font-size: clamp(1rem, 1.5vw, 2rem);
-    padding-left: 2px;
-    padding-right: 2px;
+    font-size: clamp(0.8rem, 1.5vw, 1.8rem);
+    padding-right: 1.5px;
+    padding-left: 1.5px;
 }
 a {
     text-decoration: none;
