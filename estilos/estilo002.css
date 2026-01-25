@@ -40,7 +40,7 @@ nav p {
     color: white;
 }
 nav a {
-font-size: clamp(0.7rem, 1.5vw, 1.8rem);
+    font-size: clamp(14px, 1vw, 18px);
     padding-right: 1.5px;
     padding-left: 1.5px;
 }
