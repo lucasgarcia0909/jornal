@@ -13,11 +13,11 @@ header {
 header > h1 {
     font-family: 'Zalando Sans Expanded';
     text-align: center;
-    text-shadow: 0.5px 1px 1px rgba(0, 0, 0, 0.388);
-    color: white;
+    text-shadow: 0.5px 1px 1px rgba(0, 0, 0, 0.281);
+    color: white; 
     padding-top: 40px;  
     margin: 0px;
-    font-size: clamp(1.5em, 3em, 5vh);
+    font-size: clamp(3vw, 4vh, 5vh);
 }
 
 .logo {

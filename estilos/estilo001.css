@@ -19,7 +19,7 @@ header > h1 {
     font-family: 'Zalando Sans Expanded';
     text-align: center;
     text-shadow: 0.5px 1px 1px rgba(0, 0, 0, 0.281);
-    color: var(--azulprincipal); 
+    color: #4472CA; 
     padding-top: 40px;  
     margin: 0px;
     font-size: clamp(3vw, 4vh, 5vh);
