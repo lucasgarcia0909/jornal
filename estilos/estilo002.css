@@ -40,7 +40,8 @@ nav p {
     color: white;
 }
 nav a {
-    font-size: clamp(14px, 1vw, 18px);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(12px, 2vw, 17px);
     padding-right: 1.5px;
     padding-left: 1.5px;
 }
@@ -72,9 +73,11 @@ article p {
     color: rgba(81, 81, 81, 0.956);
 }
 main {
+    text-align: justify;
     background-color: white;
     border-radius: 5px;
     max-width: 1000px;
+   
     margin: auto;
 }
 main > p {
