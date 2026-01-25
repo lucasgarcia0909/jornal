@@ -116,6 +116,7 @@ footer {
 }
 footer p {
     font-family: 'Zalando Sans Expanded';
+    font-size: clamp(12px, 2vw, 17px);
     line-height: 35px;
     text-align: center;
     text-shadow: 0.5px 1px 1px rgba(0, 0, 0, 0.281);
