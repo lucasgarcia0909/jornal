@@ -4,12 +4,14 @@
 :root {
     --fonte01: 'Vend Sans'
 }
+
 header {
   background-color: rgba(232, 232, 25, 0.738);
   margin: auto;
   min-height: 100px;
   box-shadow: 1px 1px 1px  rgba(0, 0, 0, 0.252);
 }
+
 header > h1 {
     font-family: 'Zalando Sans Expanded';
     text-align: center;
@@ -23,22 +25,25 @@ header > h1 {
 .logo {
     display: flex;
     justify-content: center;
+   
     align-items: center;
 }
 .logo img {
     max-width: 100%;
     margin-bottom: 20px;
-    margin-top: 20px;
 }
+
 nav {
     background-color: #2a467a;
     padding: 6px;
 }
+
 nav p {
     font-size: clamp(0.5em, 1em, 5em);
     text-align: center;
     color: white;
 }
+
 nav a {
     font-family: Arial, Helvetica, sans-serif;
     font-size: clamp(12px, 2vw, 17px);
@@ -51,11 +56,13 @@ a {
     color: white;
     text-align: center;
 }
+
 a:hover {
     background-color: white;
     color: #2a467a;
     transition-duration: 0.5s;
 }
+
 body {
     background-color: white;
     margin: 0px;
@@ -72,6 +79,7 @@ article p {
     background-color: #4473ca1b;
     color: rgba(81, 81, 81, 0.956);
 }
+
 main {
     text-align: justify;
     background-color: white;
@@ -80,6 +88,7 @@ main {
    
     margin: auto;
 }
+
 main > p {
     margin: auto;
 }
@@ -90,16 +99,19 @@ section {
     max-width: 150px;
     border-radius: 0px 0px 50px 50px;
 }
+
 section > h2 {
     margin: 0px;
     text-align: center;
 }
+
 article img {
     display: block;
     padding: 30px;
     max-width: 500;
     margin: auto;
 }
+
 article > h2 {
     margin: 0px;
     padding: 20px 0px 20px 20px;
