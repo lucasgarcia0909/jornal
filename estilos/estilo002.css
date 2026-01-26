@@ -67,15 +67,14 @@ body {
     background-color: white;
     margin: 0px;
 }
-article p {
+main p {
+    text-align: justify;
     max-width: 600px;
     padding: 0px 20px 0px 20px;
     font-family: var(--fonte01);
     font-weight: 700;
     margin: auto; 
-    font-size: clamp(1.8vw, 2.3vh, 3vh);
-    padding-top: 20px;
-    padding-bottom: 20px;
+    font-size: clamp(2vw, 2.5vh, 3vh);
     background-color: #4473ca1b;
     color: rgba(81, 81, 81, 0.956);
 }
@@ -85,24 +84,11 @@ main {
     background-color: white;
     border-radius: 5px;
     max-width: 1000px;
-   
     margin: auto;
 }
 
 main > p {
     margin: auto;
-}
-
-section {
-    background-color: #2a467a;
-    color: white;
-    max-width: 150px;
-    border-radius: 0px 0px 50px 50px;
-}
-
-section > h2 {
-    margin: 0px;
-    text-align: center;
 }
 
 article img {
