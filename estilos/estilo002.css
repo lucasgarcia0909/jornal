@@ -1,12 +1,19 @@
-@charset "UTF-8";   
-@import url('https://fonts.googleapis.com/css2?family=Vend+Sans:ital,wght@0,300..700;1,300..700&display=swap');
+@charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Vend+Sans:ital,wght@0,300..700;1,300..700&display=swap');
+
 :root {
-    --fonte01: 'Vend Sans'
+    --azulprincipal: #4472CA;
+    --preto: #1E1E24;
+    --branco: #FDFFFC;  
+    --fundos: #8da8d9bc;
+    --fonte01: 'Sansation';
+    --fonte02: 'Vend Sans'
 }
 
 header {
-  background-color: rgba(232, 232, 25, 0.738);
+  background-color: rgb(245, 245, 71);
   margin: auto;
   min-height: 100px;
   box-shadow: 1px 1px 1px  rgba(0, 0, 0, 0.252);
@@ -25,12 +32,13 @@ header > h1 {
 .logo {
     display: flex;
     justify-content: center;
-   
     align-items: center;
 }
+
 .logo img {
     max-width: 100%;
     margin-bottom: 20px;
+   
 }
 
 nav {
@@ -39,39 +47,49 @@ nav {
 }
 
 nav p {
-    font-size: clamp(0.5em, 1em, 5em);
     text-align: center;
     color: white;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 nav a {
-    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    color: white;
+    text-align: center;
     font-size: clamp(12px, 2vw, 17px);
+    font-family: Arial, Helvetica, sans-serif;
     padding-right: 1.5px;
     padding-left: 1.5px;
 }
 
-a {
-    text-decoration: none;
-    color: white;
-    text-align: center;
-}
-
-a:hover {
+nav a:hover {
     background-color: white;
     color: #2a467a;
     transition-duration: 0.5s;
 }
 
+a#tel {
+    text-shadow: none;
+}
+
 body {
-    background-color: white;
+    background-color: #95a2b8a4;
     margin: 0px;
 }
+
+main {
+    background-color: white;
+    border-radius: 5px;
+    max-width: 1000px;
+    margin: auto;
+}
+
 main p {
     text-align: center;
     max-width: 600px;
     padding: 0px 20px 0px 20px;
-    font-family: var(--fonte01);
+    font-family: 'Vend Sans', Arial, Helvetica, sans-serif;
     font-weight: 700;
     margin: auto; 
     font-size: clamp(2vw, 2.5vh, 3vh);
@@ -79,16 +97,25 @@ main p {
     color: rgba(81, 81, 81, 0.956);
 }
 
-main {
-    text-align: justify;
-    background-color: white;
-    border-radius: 5px;
-    max-width: 1000px;
+main > p {
     margin: auto;
 }
 
-main > p {
-    margin: auto;
+article > p > a {
+    text-align: center;
+    max-width: 600px;
+    text-decoration: none;
+    padding: 0px 20px 0px 20px;
+    font-family: 'Vend Sans', Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    margin: auto; 
+    font-size: clamp(2vw, 2.5vh, 3vh);
+    color: rgba(81, 81, 81, 0.956);
+}
+
+article > p > a:hover {
+    color: rgba(59, 59, 59, 0.956);
+    text-decoration: underline;
 }
 
 article img {
@@ -104,3 +131,30 @@ article > h2 {
     max-width: 100px;
     border-radius: 0px 0px 5px 5px;
 }
+
+footer {
+    background-color: #2a467a;
+}
+
+footer p {
+    font-family: 'Zalando Sans Expanded';
+    font-size: clamp(12px, 2vw, 17px);
+    line-height: 35px;
+    text-align: center;
+    text-shadow: 0.5px 1px 1px rgba(0, 0, 0, 0.281);
+    color: white; 
+    margin: 0px;
+}
+
+footer a {
+    text-decoration: none;
+    color: white;
+    text-align: center;
+}
+
+footer a:hover {
+    background-color: white;
+    color: #2a467a;
+    transition-duration: 0.5s;
+}
+
