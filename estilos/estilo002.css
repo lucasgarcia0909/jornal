@@ -115,14 +115,16 @@ article > p > a {
 
 article > p > a:hover {
     color: rgba(59, 59, 59, 0.956);
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 article img {
     display: block;
     padding: 30px;
-    max-width: 500;
+    max-width: 100%;
+    height: auto;
     margin: auto;
+    box-sizing: border-box;
 }
 
 article > h2 {

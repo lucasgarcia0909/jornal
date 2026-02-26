@@ -115,14 +115,18 @@ article > p > a {
 
 article > p > a:hover {
     color: rgba(59, 59, 59, 0.956);
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 article img {
+    
     display: block;
     padding: 30px;
-    max-width: 500;
+    max-width: 100%;
+    height: auto;
     margin: auto;
+    box-sizing: border-box;
+    
 }
 
 article > h2 {
@@ -158,4 +162,13 @@ footer a:hover {
     transition-duration: 0.5s;
 }
 
+.acontato {
+    color: #2a467a;
+}
+
+.acontato:hover {
+    background-color: #2a467a;
+    color: white;
+    transition-duration: 0.5s;
+}
 
