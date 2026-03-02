@@ -10,7 +10,7 @@
     --backp: #4473ca1b;
     --mainp: rgba(81, 81, 81, 0.956);
     --articlepa: rgba(81, 81, 81, 0.956);
-    --articlepahover: color: rgba(59, 59, 59, 0.956);
+    --articlepahover: rgba(59, 59, 59, 0.956);
     --backbody: #95a2b8a4;
     /* Tons de preto */
     --p: rgba(81, 81, 81, 0.956);
@@ -19,6 +19,12 @@
     --textshadow: rgba(0, 0, 0, 0.281);
     /* Tons de Amarelo */
     --amarelo: rgb(242, 242, 71);
+    /* Fontes */
+    --fonteheaderh1: 'Zalando Sans Expanded';
+    --fontefooterp: 'Zalando Sans Expanded';
+    --fontemainp: 'Vend Sans';
+    --fontearticlepa: 'Vend Sans';
+    --fontenava: 'Arial, Helvetica, sans-serif';
 }
 
 header {
@@ -29,7 +35,7 @@ header {
 }
 
 header > h1 {
-    font-family: 'Zalando Sans Expanded';
+    font-family: var(--fonteheaderh1);
     text-align: center;
     text-shadow: 0.5px 1px 1px rgba(0, 0, 0, 0.281);
     color: var(--h1header); 
@@ -67,7 +73,7 @@ nav a {
     color: white;
     text-align: center;
     font-size: clamp(12px, 2vw, 17px);
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--fontenava);
     padding-right: 1.5px;
     padding-left: 1.5px;
 }
@@ -98,7 +104,7 @@ main p {
     text-align: center;
     max-width: 600px;
     padding: 0px 20px 0px 20px;
-    font-family: 'Vend Sans', Arial, Helvetica, sans-serif;
+    font-family: var(--fontemainp);
     font-weight: 700;
     margin: auto; 
     font-size: clamp(2vw, 2.5vh, 3vh);
@@ -115,7 +121,7 @@ article > p > a {
     max-width: 600px;
     text-decoration: none;
     padding: 0px 20px 0px 20px;
-    font-family: 'Vend Sans', Arial, Helvetica, sans-serif;
+    font-family: var(--fontearticlepa);
     font-weight: 700;
     margin: auto; 
     font-size: clamp(2vw, 2.5vh, 3vh);
@@ -150,7 +156,7 @@ footer {
 }
 
 footer p {
-    font-family: 'Zalando Sans Expanded';
+    font-family: var(--fontefooterp);
     font-size: clamp(12px, 2vw, 17px);
     line-height: 35px;
     text-align: center;
