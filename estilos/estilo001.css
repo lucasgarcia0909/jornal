@@ -4,12 +4,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Vend+Sans:ital,wght@0,300..700;1,300..700&display=swap');
 
 :root {
-    --azulprincipal: #4472CA;
-    --preto: #1E1E24;
-    --branco: #FDFFFC;  
-    --fundos: #8da8d9bc;
-    --fonte01: 'Sansation';
-    --fonte02: 'Vend Sans'
+    /*  Tons de Azul */
+    --h1header: #4472CA;
+    --backnavefooter: #2a467a;
+    --backp: #4473ca1b;
+    --mainp: rgba(81, 81, 81, 0.956);
+    --articlepa: rgba(81, 81, 81, 0.956);
+    --articlepahover: color: rgba(59, 59, 59, 0.956);
+    --backbody: #95a2b8a4;
+    /* Tons de preto */
+    --p: rgba(81, 81, 81, 0.956);
+    --ahover: rgba(59, 59, 59, 0.956);
+    --headershadow: rgba(0, 0, 0, 0.252);
+    --textshadow: rgba(0, 0, 0, 0.281);
+    /* Tons de Amarelo */
+    --amarelo: rgb(242, 242, 71);
 }
 
 header {
@@ -23,7 +32,7 @@ header > h1 {
     font-family: 'Zalando Sans Expanded';
     text-align: center;
     text-shadow: 0.5px 1px 1px rgba(0, 0, 0, 0.281);
-    color: #4472CA; 
+    color: var(--h1header); 
     padding-top: 40px;  
     margin: 0px;
     font-size: clamp(3vw, 4vh, 5vh);
@@ -42,7 +51,7 @@ header > h1 {
 }
 
 nav {
-    background-color: #2a467a;
+    background-color: var(--backnavefooter);
     padding: 6px;
 }
 
@@ -65,7 +74,7 @@ nav a {
 
 nav a:hover {
     background-color: white;
-    color: #2a467a;
+    color: var(--backnavefooter);
     transition-duration: 0.5s;
 }
 
@@ -74,7 +83,7 @@ a#tel {
 }
 
 body {
-    background-color: #95a2b8a4;
+    background-color: var(--backbody);
     margin: 0px;
 }
 
@@ -93,8 +102,8 @@ main p {
     font-weight: 700;
     margin: auto; 
     font-size: clamp(2vw, 2.5vh, 3vh);
-    background-color: #4473ca1b;
-    color: rgba(81, 81, 81, 0.956);
+    background-color: var(--backp);
+    color: var(--mainp);
 }
 
 main > p {
@@ -110,11 +119,11 @@ article > p > a {
     font-weight: 700;
     margin: auto; 
     font-size: clamp(2vw, 2.5vh, 3vh);
-    color: rgba(81, 81, 81, 0.956);
+    color: var(--articlepa);
 }
 
 article > p > a:hover {
-    color: rgba(59, 59, 59, 0.956);
+    color: var(--articlepahover);
     text-decoration: none;
 }
 
@@ -137,7 +146,7 @@ article > h2 {
 }
 
 footer {
-    background-color: #2a467a;
+    background-color: var(--backnavefooter);
 }
 
 footer p {
@@ -157,7 +166,7 @@ footer a {
 
 footer a:hover {
     background-color: white;
-    color: #2a467a;
+    color: var(--backnavefooter);
     transition-duration: 0.5s;
 }
 
