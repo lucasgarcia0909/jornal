@@ -73,7 +73,7 @@ nav a {
     color: white;
     text-align: center;
     font-size: clamp(12px, 2vw, 17px);
-    font-family: var(--fontenava);
+    font-family: Arial, Helvetica, sans-serif;
     padding-right: 1.5px;
     padding-left: 1.5px;
 }
@@ -178,5 +178,44 @@ footer a:hover {
 
 
 @media (prefers-color-scheme: dark) {
+    header {
+        background-color: #2b2e34;
+    }
+
+    header h1 {
+        color: white;
+    }
     
+    nav {
+        background-color: #1b2a4a;
+    }
+
+    nav a:hover {
+        background-color: rgb(198, 198, 198);
+        color: #182744;
+    }
+
+    body {
+        background-color: #2b2e34;
+    }
+    
+    main {
+        background-color: rgb(38, 38, 38);
+    }
+
+    article > p > a {
+        color: rgb(215, 215, 215);
+    }
+
+    article > p > a:hover {
+        color: rgb(202, 202, 202);
+    }
+
+    footer {
+        background-color: #23262a;
+    }
+
+    footer > p > a:hover {
+        color: #15243e;
+    }
 }
