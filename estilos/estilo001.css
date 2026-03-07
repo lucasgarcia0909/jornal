@@ -11,7 +11,7 @@
     --mainp: rgba(81, 81, 81, 0.956);
     --articlepa: rgba(81, 81, 81, 0.956);
     --articlepahover: rgba(59, 59, 59, 0.956);
-    --backbody: #95a2b8;
+    --backbody: #2a467a;
     /* Tons de preto */
     --p: rgba(81, 81, 81, 0.956);
     --ahover: rgba(59, 59, 59, 0.956);
@@ -89,7 +89,7 @@ a#tel {
 }
 
 body {
-    background-color: var(--backbody);
+    background-color: #95a2b8;
     margin: 0px;
 }
 
@@ -144,6 +144,10 @@ article > p > a:hover {
     text-decoration: none;
 }
 
+article > a > img {
+    padding-top: 0px;
+}
+
 article img {
     
     display: block;
@@ -156,10 +160,9 @@ article img {
 }
 
 article > h2 {
-    margin: 0px;
-    padding: 20px 0px 20px 20px;
-    max-width: 100px;
-    border-radius: 0px 0px 5px 5px;
+    font-family: var(--fonteheaderh1);
+    font-size: (1.5vw, 2vh, 3vh);
+    text-align: center;
 }
 
 footer {
@@ -187,6 +190,22 @@ footer a:hover {
     transition-duration: 0.5s;
 }
 
+.aviso {
+    background-color: #95a2b8;
+}
+
+.aviso p {
+    color: white;
+    padding-top: 100px;
+}
+
+#noti001 p {
+    background-color: white;
+}
+
+#noti001 p > a {
+    color: #2a467a;
+}
 
 @media (prefers-color-scheme: dark) {
     header {
@@ -222,9 +241,6 @@ footer a:hover {
         color: rgb(215, 215, 215);
     }
 
-    article > p > a:hover {
-        color: rgb(202, 202, 202);
-    }
 
     footer {
         background-color: #23262a;
@@ -233,4 +249,17 @@ footer a:hover {
     footer > p > a:hover {
         color: #15243e;
     }
+
+    .aviso {
+    background-color: #2b2e34;
+    padding-top: 100px;
+}
+
+    #noti001 p {
+        background-color: rgb(38, 38, 38);
+    }
+    #noti001 > p > a {
+        color: white;
+    }
+
 }
