@@ -108,12 +108,23 @@ main p {
     font-weight: 700;
     margin: auto; 
     font-size: clamp(2vw, 2.5vh, 3vh);
-    background-color: var(--backp);
     color: var(--mainp);
 }
 
 main > p {
     margin: auto;
+}
+
+article > p {
+    text-align: center;
+    max-width: 600px;
+    text-decoration: none;
+    padding: 0px 20px 0px 20px;
+    font-family: var(--fontemainp);
+    font-weight: 700;
+    margin: auto; 
+    font-size: clamp(2vw, 2.5vh, 3vh);
+    color: #2a467a;
 }
 
 article > p > a {
