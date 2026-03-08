@@ -191,11 +191,11 @@ footer a:hover {
 }
 
 .aviso {
-    background-color: #95a2b8;
+    background-color: white;
 }
 
 .aviso p {
-    color: white;
+    color: #2a467a;
     padding-top: 100px;
 }
 

@@ -88,8 +88,9 @@ a#tel {
     text-shadow: none;
 }
 
+/*Mudar a cor para #95a2b8 quando houver notícias*/
 body {
-    background-color: #95a2b8;
+    background-color: white;
     margin: 0px;
 }
 
@@ -188,11 +189,11 @@ footer a:hover {
 }
 
 .aviso {
-    background-color: #95a2b8;
+    background-color: white;
 }
 
 .aviso p {
-    color: white;
+    color: #2a467a;
     padding-top: 100px;
 }
 
