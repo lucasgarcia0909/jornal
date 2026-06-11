@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>Painel Admin — Joaquim News</title>
+    <link rel="stylesheet" href="estilos/estilo001.css">
+    <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+    <header>
+        <h1>Painel Admin</h1>
+        <div class="logo">
+            <picture>
+                <source media="(max-width: 500px)" srcset="imagens/logo70.png" type="image/png">
+                <img src="imagens/logo.png" alt="Logo do Joaquim News">
+            </picture>
+        </div>
+    </header>
+
+    <nav>
+        <p>
+            <a href="index.html">Home</a>
+            /
+            <a href="esportes.html">Esportes</a>
+            /
+            <a href="cultura.html">Cultura</a>
+            /
+            <a href="eventos.html">Eventos</a>
+            /
+            <a href="escola.html">Escola</a>
+            /
+            <a href="sobrenos.html">Sobre nós</a>
+        </p>
+    </nav>
+
+    <main>
+
+        <!-- TELA DE LOGIN -->
+        <div id="tela-login">
+            <div class="login-box">
+                <h2>Acesso Restrito</h2>
+                <p class="msg-erro" id="msg-erro">Usuário ou senha incorretos.</p>
+                <div class="campo-form">
+                    <label for="input-usuario">Usuário</label>
+                    <input type="text" id="input-usuario" autocomplete="username">
+                </div>
+                <div class="campo-form">
+                    <label for="input-senha">Senha</label>
+                    <input type="password" id="input-senha" autocomplete="current-password">
+                </div>
+                <button class="btn-primario" id="btn-entrar">Entrar</button>
+            </div>
+        </div>
+
+        <!-- PAINEL ADMIN -->
+        <div id="tela-painel" style="display:none;">
+            <div class="painel-container">
+
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                    <h2 class="painel-secao-titulo" style="margin-top:0; border:none;">Nova Notícia</h2>
+                    <button class="btn-secundario" id="btn-sair">Sair</button>
+                </div>
+
+                <!-- Título -->
+                <div class="campo-form">
+                    <label for="input-titulo">Adicionar título</label>
+                    <input type="text" id="input-titulo" placeholder="Digite o título da notícia">
+                </div>
+
+                <!-- Capa -->
+                <div class="campo-form">
+                    <label for="input-capa">Adicionar capa</label>
+                    <input type="file" id="input-capa" accept="image/*">
+                    <small style="font-family:Arial,sans-serif; font-size:12px; color:#95a2b8;">Recomenda-se usar imagens comprimidas (menor que 500KB)</small>
+                </div>
+
+                <!-- Blocos dinâmicos -->
+                <div id="area-blocos"></div>
+
+                <!-- Botões de adicionar bloco -->
+                <div style="margin-bottom:20px;">
+                    <button class="btn-secundario" id="btn-add-texto">+ Adicionar texto</button>
+                    <button class="btn-secundario" id="btn-add-imagem">+ Adicionar imagem</button>
+                </div>
+
+                <!-- Publicar -->
+                <button class="btn-primario" id="btn-publicar">Publicar notícia</button>
+                <p class="msg-sucesso" id="msg-sucesso">Notícia publicada com sucesso!</p>
+
+                <!-- Lista de notícias -->
+                <h3 class="painel-secao-titulo">Notícias publicadas</h3>
+                <ul class="lista-artigos" id="lista-artigos"></ul>
+
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 E.M "Prefeito Joaquim Pires Sobrinho"
+            <br>
+            WHATSAPP: <a id="itel" href="https://wa.me/551931997546" target="_blank"><strong>(19) 3199-7546</strong></a>
+            <br>
+            EMAIL: <a href="mailto:contato@joaquimnews.com.br"><strong>contato@joaquimnews.com.br</strong></a>
+            <br>
+            Site desenvolvido por <strong>Lucas Garcia Guerreiro</strong>
+        </p>
+    </footer>
+
+    <script>
+        const USUARIO_CORRETO = 'admin';
+        const SENHA_CORRETA   = 'admjnews26';
+        const FIREBASE_URL    = 'https://joaquim-news-default-rtdb.firebaseio.com/noticias';
+        const SESSION_KEY     = 'jn_logado';
+
+        const telaLogin    = document.getElementById('tela-login');
+        const telaPainel   = document.getElementById('tela-painel');
+        const msgErro      = document.getElementById('msg-erro');
+        const msgSucesso   = document.getElementById('msg-sucesso');
+        const inputUsuario = document.getElementById('input-usuario');
+        const inputSenha   = document.getElementById('input-senha');
+        const btnEntrar    = document.getElementById('btn-entrar');
+        const btnSair      = document.getElementById('btn-sair');
+        const inputTitulo  = document.getElementById('input-titulo');
+        const inputCapa    = document.getElementById('input-capa');
+        const areaBlocos   = document.getElementById('area-blocos');
+        const btnAddTexto  = document.getElementById('btn-add-texto');
+        const btnAddImagem = document.getElementById('btn-add-imagem');
+        const btnPublicar  = document.getElementById('btn-publicar');
+        const listaArtigos = document.getElementById('lista-artigos');
+
+        // ── SESSÃO ────────────────────────────────────────────
+        function verificarSessao() {
+            if (sessionStorage.getItem(SESSION_KEY) === 'true') {
+                mostrarPainel();
+            } else {
+                mostrarLogin();
+            }
+        }
+
+        function mostrarLogin() {
+            telaLogin.style.display  = '';
+            telaPainel.style.display = 'none';
+        }
+
+        function mostrarPainel() {
+            telaLogin.style.display  = 'none';
+            telaPainel.style.display = '';
+            renderizarLista();
+        }
+
+        // ── LOGIN ─────────────────────────────────────────────
+        function tentarLogin() {
+            var usuario = inputUsuario.value.trim();
+            var senha   = inputSenha.value;
+            if (usuario === USUARIO_CORRETO && senha === SENHA_CORRETA) {
+                sessionStorage.setItem(SESSION_KEY, 'true');
+                msgErro.style.display = 'none';
+                mostrarPainel();
+            } else {
+                msgErro.style.display = 'block';
+                inputSenha.value = '';
+                inputSenha.focus();
+            }
+        }
+
+        btnEntrar.addEventListener('click', tentarLogin);
+        inputSenha.addEventListener('keydown', function(e) { if (e.key === 'Enter') tentarLogin(); });
+        inputUsuario.addEventListener('keydown', function(e) { if (e.key === 'Enter') inputSenha.focus(); });
+
+        // ── LOGOUT ────────────────────────────────────────────
+        btnSair.addEventListener('click', function() {
+            sessionStorage.removeItem(SESSION_KEY);
+            mostrarLogin();
+            inputUsuario.value = '';
+            inputSenha.value   = '';
+        });
+
+        // ── BLOCOS DINÂMICOS ──────────────────────────────────
+        function criarBlocoTexto() {
+            var bloco = document.createElement('div');
+            bloco.className    = 'bloco-conteudo';
+            bloco.dataset.tipo = 'texto';
+            bloco.innerHTML =
+                '<button class="btn-remover-bloco" type="button">&times;</button>' +
+                '<label>Adicionar texto</label>' +
+                '<textarea placeholder="Digite o parágrafo aqui..."></textarea>';
+            bloco.querySelector('.btn-remover-bloco').addEventListener('click', function() { bloco.remove(); });
+            areaBlocos.appendChild(bloco);
+            bloco.querySelector('textarea').focus();
+        }
+
+        function criarBlocoImagem() {
+            var bloco = document.createElement('div');
+            bloco.className    = 'bloco-conteudo';
+            bloco.dataset.tipo = 'imagem';
+            bloco.innerHTML =
+                '<button class="btn-remover-bloco" type="button">&times;</button>' +
+                '<label>Adicionar imagem</label>' +
+                '<input type="file" accept="image/*">';
+            bloco.querySelector('.btn-remover-bloco').addEventListener('click', function() { bloco.remove(); });
+            areaBlocos.appendChild(bloco);
+        }
+
+        btnAddTexto.addEventListener('click',  criarBlocoTexto);
+        btnAddImagem.addEventListener('click', criarBlocoImagem);
+
+        // ── BASE64 ────────────────────────────────────────────
+        function lerBase64(file) {
+            return new Promise(function(resolve, reject) {
+                if (!file) { resolve(null); return; }
+                var reader = new FileReader();
+                reader.onload  = function(e) { resolve(e.target.result); };
+                reader.onerror = function()  { reject(new Error('Erro ao ler arquivo')); };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // ── PUBLICAR ──────────────────────────────────────────
+        btnPublicar.addEventListener('click', async function() {
+            var titulo = inputTitulo.value.trim();
+            if (!titulo) {
+                alert('Por favor, adicione um título à notícia.');
+                inputTitulo.focus();
+                return;
+            }
+
+            btnPublicar.disabled    = true;
+            btnPublicar.textContent = 'Publicando...';
+
+            try {
+                var capaBase64 = await lerBase64(inputCapa.files[0] || null);
+
+                var blocoEls = areaBlocos.querySelectorAll('.bloco-conteudo');
+                var blocos   = [];
+
+                for (var i = 0; i < blocoEls.length; i++) {
+                    var el   = blocoEls[i];
+                    var tipo = el.dataset.tipo;
+                    if (tipo === 'texto') {
+                        var conteudo = el.querySelector('textarea').value.trim();
+                        if (conteudo) blocos.push({ tipo: 'texto', conteudo: conteudo });
+                    } else if (tipo === 'imagem') {
+                        var arquivo = el.querySelector('input[type="file"]').files[0] || null;
+                        var b64     = await lerBase64(arquivo);
+                        if (b64) blocos.push({ tipo: 'imagem', conteudo: b64 });
+                    }
+                }
+
+                var hoje    = new Date();
+                var dataStr = hoje.toISOString().slice(0, 10);
+                var noticia = { titulo: titulo, capa: capaBase64 || '', blocos: blocos, data: dataStr };
+
+                var res = await fetch(FIREBASE_URL + '.json', {
+                    method:  'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body:    JSON.stringify(noticia)
+                });
+
+                if (!res.ok) throw new Error('Erro ao salvar no Firebase');
+
+                msgSucesso.style.display = 'block';
+                setTimeout(function() { msgSucesso.style.display = 'none'; }, 3000);
+
+                inputTitulo.value    = '';
+                inputCapa.value      = '';
+                areaBlocos.innerHTML = '';
+                await renderizarLista();
+
+            } catch (err) {
+                alert('Erro ao publicar: ' + err.message + '\n\nVerifique se a URL do Firebase está configurada corretamente.');
+            } finally {
+                btnPublicar.disabled    = false;
+                btnPublicar.textContent = 'Publicar notícia';
+            }
+        });
+
+        // ── LISTA DE NOTÍCIAS ─────────────────────────────────
+        async function renderizarLista() {
+            listaArtigos.innerHTML = '<li style="color:#95a2b8; font-style:italic; border:none;">Carregando...</li>';
+            try {
+                var res   = await fetch(FIREBASE_URL + '.json');
+                var dados = await res.json();
+
+                listaArtigos.innerHTML = '';
+
+                if (!dados) {
+                    listaArtigos.innerHTML = '<li style="color:#95a2b8; font-style:italic; border:none;">Nenhuma notícia publicada ainda.</li>';
+                    return;
+                }
+
+                var entradas = Object.entries(dados).sort(function(a, b) {
+                    return b[1].data.localeCompare(a[1].data);
+                });
+
+                entradas.forEach(function(entrada) {
+                    var chave  = entrada[0];
+                    var noticia = entrada[1];
+
+                    var li   = document.createElement('li');
+                    var span = document.createElement('span');
+                    span.textContent        = noticia.titulo + ' (' + noticia.data + ')';
+                    span.style.flex         = '1';
+                    span.style.minWidth     = '0';
+                    span.style.overflow     = 'hidden';
+                    span.style.textOverflow = 'ellipsis';
+                    span.style.whiteSpace   = 'nowrap';
+
+                    var btnDel = document.createElement('button');
+                    btnDel.className   = 'btn-deletar';
+                    btnDel.textContent = 'Excluir';
+                    btnDel.addEventListener('click', function() { deletarNoticia(chave); });
+
+                    li.appendChild(span);
+                    li.appendChild(btnDel);
+                    listaArtigos.appendChild(li);
+                });
+
+            } catch (err) {
+                listaArtigos.innerHTML = '<li style="color:#c0392b; border:none;">Erro ao carregar notícias. Verifique a URL do Firebase.</li>';
+            }
+        }
+
+        // ── DELETAR ───────────────────────────────────────────
+        async function deletarNoticia(chave) {
+            if (!confirm('Tem certeza que deseja excluir esta notícia?')) return;
+            try {
+                await fetch(FIREBASE_URL + '/' + chave + '.json', { method: 'DELETE' });
+                await renderizarLista();
+            } catch (err) {
+                alert('Erro ao excluir: ' + err.message);
+            }
+        }
+
+        // ── INICIAR ───────────────────────────────────────────
+        verificarSessao();
+    </script>
+
+</body>
+</html>

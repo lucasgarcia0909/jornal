@@ -188,11 +188,7 @@ footer a:hover {
     transition-duration: 0.5s;
 }
 
-.aviso {
-    background-color: white;
-}
-
-.aviso p {
+p.aviso {
     color: #2a467a;
     padding-top: 100px;
 }
@@ -220,7 +216,7 @@ footer a:hover {
     }
     
     main {
-        background-color: rgb(38, 38, 38);
+        background-color: #2b2e34;
     }
 
     article > p {
@@ -242,16 +238,15 @@ footer a:hover {
     footer > p > a:hover {
         color: #15243e;
     }
-
-    .aviso {
-    background-color: #2b2e34;
-    padding-top: 100px;
-}
-
     #noti001 p {
-        background-color: rgb(38, 38, 38);
+        background-color: #2b2e34;
     }
     #noti001 > p > a {
+        font-family: var(--fontemainp);
         color: white;
     }
+    p.aviso {
+        color: white;
+    }
+    
 }

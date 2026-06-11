@@ -37,7 +37,7 @@ header {
 header > h1 {
     font-family: var(--fonteheaderh1);
     text-align: center;
-    text-shadow: 0.5px 1px 1px rgba(0, 0, 0, 0.281);
+    text-shadow: 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.255);
     color: var(--h1header); 
     padding-top: 40px;  
     margin: 0px;
@@ -96,7 +96,6 @@ body {
 main {
     background-color: white;
     border-radius: 5px;
-    max-width: 1000px;
     margin: auto;
 }
 
@@ -105,7 +104,6 @@ main p {
     max-width: 600px;
     padding: 0px 20px 0px 20px;
     font-family: var(--fontemainp);
-    font-weight: 700;
     margin: auto; 
     font-size: clamp(2vw, 2.5vh, 3vh);
     color: var(--mainp);
@@ -121,7 +119,6 @@ article > p {
     text-decoration: none;
     padding: 0px 20px 0px 20px;
     font-family: var(--fontemainp);
-    font-weight: 700;
     margin: auto; 
     font-size: clamp(2vw, 2.5vh, 3vh);
     color: #2a467a;
@@ -132,17 +129,21 @@ article > p > a {
     max-width: 600px;
     text-decoration: none;
     padding: 0px 20px 0px 20px;
-    font-family: var(--fontearticlepa);
-    font-weight: 700;
     margin: auto;
     font-size: clamp(2vw, 2.5vh, 3vh);
-    color: var(--articlepa);
+    color: #2a467a;
 }
 
 article > p > a:hover {
-    color: var(--articlepahover);
-    text-decoration: none;
+    color: #182744;
 }
+
+.hoverfb:hover {
+    color: white;
+    background-color: #2a467a;
+    transition-duration: 0.5s;
+}
+
 
 article > a > img {
     padding-top: 0px;
@@ -176,6 +177,8 @@ footer p {
     text-align: center;
     color: white; 
     margin: 0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 footer a {
@@ -190,14 +193,9 @@ footer a:hover {
     transition-duration: 0.5s;
 }
 
-.aviso {
-    background-color: white;
-}
-
-.aviso p {
+ ul {
     color: #2a467a;
-    padding-top: 100px;
-}
+ }
 
 #noti001 p {
     background-color: white;
@@ -205,6 +203,40 @@ footer a:hover {
 
 #noti001 p > a {
     color: #2a467a;
+}
+
+.creditos {
+    padding: 10px;
+}
+
+.notirig {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
+.notirig > p > a {
+    text-align: center;
+    max-width: 600px;
+    text-decoration: none;
+    padding: 0px 20px 0px 20px;
+    margin: auto;
+    font-size: clamp(2vw, 2.5vh, 3vh);
+    color: #2a467a;
+}
+
+.notirig > p > a:hover {
+    color: #182744;
+}
+
+@media (max-width: 900px) {
+    
+    .notirig {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -230,36 +262,350 @@ footer a:hover {
     }
     
     main {
-        background-color: rgb(38, 38, 38);
+        background-color: #2b2e34;
     }
 
     article > p {
-        color: rgb(215, 215, 215);
+        color: white;
     }
 
     article > p > a {
-        color: rgb(215, 215, 215);
+        color: white;
     }
-
+    article > p > a:hover {
+        color: white;
+    }
+    .hoverfb:hover {
+        color: white;
+        background-color: #2b2e34;
+    }
 
     footer {
         background-color: #23262a;
     }
 
     footer > p > a:hover {
-        color: #15243e;
+        color: #23262a;
+    }
+
+    ul {
+        color: white;
     }
 
     .aviso {
     background-color: #2b2e34;
-    padding-top: 100px;
+    padding-top: 10px;
 }
-
-    #noti001 p {
-        background-color: rgb(38, 38, 38);
+    .creditos {
+        padding: 10px;
     }
-    #noti001 > p > a {
+    .noti p {
+        background-color: #2b2e34;
+    }
+    .noti > p > a {
         color: white;
     }
 
+}
+
+/* ==============================================
+   PAINEL ADMIN — estilos adicionais
+   ============================================== */
+
+.painel-container {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+.login-box {
+    max-width: 380px;
+    margin: 60px auto;
+    padding: 32px 28px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.login-box h2 {
+    font-family: var(--fonteheaderh1);
+    color: #4472CA;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 24px;
+    font-size: 1.4rem;
+}
+
+.campo-form {
+    margin-bottom: 18px;
+}
+
+.campo-form label {
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #2a467a;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.campo-form input[type="text"],
+.campo-form input[type="password"],
+.campo-form input[type="file"],
+.campo-form textarea {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1.5px solid #2a467a;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #2a467a;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.campo-form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.campo-form input:focus,
+.campo-form textarea:focus {
+    outline: none;
+    border-color: #4472CA;
+    box-shadow: 0 0 0 2px rgba(68,114,202,0.2);
+}
+
+.btn-primario {
+    display: block;
+    width: 100%;
+    padding: 11px;
+    background-color: #2a467a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition-duration: 0.3s;
+}
+
+.btn-primario:hover {
+    background-color: #1b2e52;
+}
+
+.btn-secundario {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: white;
+    color: #2a467a;
+    border: 1.5px solid #2a467a;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    transition-duration: 0.3s;
+}
+
+.btn-secundario:hover {
+    background-color: #2a467a;
+    color: white;
+}
+
+.msg-erro {
+    color: #c0392b;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    text-align: center;
+    margin-bottom: 12px;
+    display: none;
+}
+
+.msg-sucesso {
+    color: #27ae60;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 12px;
+    display: none;
+}
+
+.bloco-conteudo {
+    position: relative;
+    margin-bottom: 14px;
+    padding: 14px;
+    border: 1px dashed #95a2b8;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+
+.bloco-conteudo label {
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color: #2a467a;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.bloco-conteudo textarea,
+.bloco-conteudo input[type="file"] {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1.5px solid #2a467a;
+    border-radius: 4px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #2a467a;
+    box-sizing: border-box;
+    background-color: white;
+}
+
+.bloco-conteudo textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.btn-remover-bloco {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    color: #c0392b;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    line-height: 1;
+    padding: 2px 6px;
+}
+
+.btn-remover-bloco:hover {
+    background-color: #c0392b;
+    color: white;
+    border-radius: 3px;
+}
+
+.painel-secao-titulo {
+    font-family: var(--fonteheaderh1);
+    color: #2a467a;
+    font-size: 1.2rem;
+    border-bottom: 2px solid #2a467a;
+    padding-bottom: 6px;
+    margin-top: 32px;
+    margin-bottom: 16px;
+}
+
+.lista-artigos {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lista-artigos li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    border-bottom: 1px solid #95a2b8;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #2a467a;
+}
+
+.lista-artigos li:last-child {
+    border-bottom: none;
+}
+
+.btn-deletar {
+    background: none;
+    border: 1.5px solid #c0392b;
+    color: #c0392b;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    transition-duration: 0.3s;
+    white-space: nowrap;
+    margin-left: 12px;
+    flex-shrink: 0;
+}
+
+.btn-deletar:hover {
+    background-color: #c0392b;
+    color: white;
+}
+
+.link-admin {
+    font-size: 11px;
+    opacity: 0.6;
+}
+
+.link-admin:hover {
+    opacity: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+    .login-box {
+        background-color: #2b2e34;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    .login-box h2 {
+        color: #6fa3ef;
+    }
+
+    .campo-form label {
+        color: #a0b4d0;
+    }
+
+    .campo-form input[type="text"],
+    .campo-form input[type="password"],
+    .campo-form input[type="file"],
+    .campo-form textarea {
+        background-color: #23262a;
+        color: #d0d8e8;
+        border-color: #3a5080;
+    }
+
+    .bloco-conteudo {
+        background-color: #23262a;
+        border-color: #3a5080;
+    }
+
+    .bloco-conteudo label {
+        color: #a0b4d0;
+    }
+
+    .bloco-conteudo textarea,
+    .bloco-conteudo input[type="file"] {
+        background-color: #2b2e34;
+        color: #d0d8e8;
+        border-color: #3a5080;
+    }
+
+    .painel-secao-titulo {
+        color: #a0b4d0;
+        border-bottom-color: #3a5080;
+    }
+
+    .lista-artigos li {
+        color: #d0d8e8;
+        border-bottom-color: #3a5080;
+    }
+
+    .btn-secundario {
+        background-color: #2b2e34;
+        color: #a0b4d0;
+        border-color: #3a5080;
+    }
+
+    .btn-secundario:hover {
+        background-color: #3a5080;
+        color: white;
+    }
 }

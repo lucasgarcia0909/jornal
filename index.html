@@ -4,20 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <title>JNEWS</title>
+    <title>Joaquim News</title>
     <link rel="stylesheet" href="estilos/estilo001.css">
     <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon">    
 </head>
+
 <body>
+
     <header>
     <h1>Joaquim News</h1>
     <div class="logo">
         <picture>
-            <source media="(max-width: 150px)" srcset="imagens/logo70.png">
-            <img src="imagens/logo.png" alt="Logo do joaquim news">
+            <source media="(max-width: 500px)" srcset="imagens/logo70.png" type="image/png">
+            <img src="imagens/logo.png" alt="Logo do Joaquim News">
         </picture>
     </div>
     </header>
+
     <nav>
      <p><a href="index.html">Home</a>
          / 
@@ -32,20 +35,41 @@
         <a href="sobrenos.html">Sobre nós</a>
     </p>
     </nav>
+
     <main>
-        <article id="noti001">   
-             <p>
-                <a href="noti001.html">Dia das mulheres: <br> Conheça a história e algumas mulheres que revolucionaram o mundo</a>
-            </p>
-                    <a href="noti001.html">
-                        <picture>
-                            <source media="(max-width: 550px)" srcset="imagens/capadiamulheres300.png" type="image/png">
-                            <source media="(max-width: 700px)" srcset="imagens/capadiamulheres500.png" type="image/png">
-                            <img src="imagens/capadiamulheres650.png" alt="Capa reportagem sobre dia das mulheres">
-                        </picture>
-                    </a>
+        <!--Essa é a estrutura da capa e título das notícias-->
+        <article class="noti">   
+            <div class="notirig">
+                <p style="font-weight: 700;">
+                   <a href="noti001.html">AJJA: <br> Tudo sobre a associação e as inscrições</a>
+                </p>
+                   <a href="noti001.html">
+                <picture>
+                    <source media="(max-width: 550px)" srcset="imagens/ajjalogo300.png" type="image/png">
+                    <source media="(max-width: 900px)" srcset="imagens/ajjalogo500.png" type="image/png">
+                    <img src="imagens/ajjalogo650.png" alt="Logo da AJJA">
+                </picture>
+             </div>
+                </a>
             </article>
+        <!---------------------------------------------------->
+        <article class="noti"> 
+            <div class="notirig"> 
+                <p style="font-weight: 700;">
+                    <a href="noti001.html">Dia das mulheres: <br> Conheça a história e algumas mulheres que revolucionaram o mundo</a>
+                </p>
+                    <a href="noti001.html">
+                <picture>
+                    <source media="(max-width: 550px)" srcset="imagens/capadiamulheres300.png" type="image/png">
+                    <source media="(max-width: 900px)" srcset="imagens/capadiamulheres500.png" type="image/png">
+                    <img src="imagens/capadiamulheres650.png" alt="Capa reportagem sobre dia das mulheres">
+                </picture>
+            </div>
+                </a>
+            </article>
+        <!---------------------------------------------------->
     </main>
+
     <footer>
         <p>&copy; 2026 E.M "Prefeito Joaquim Pires Sobrinho" 
             <br>
@@ -54,7 +78,48 @@
              EMAIL: <a href="mailto:contato@joaquimnews.com.br"><strong>contato@joaquimnews.com.br</strong></a>
              <br>
              Site desenvolvido por <strong>Lucas Garcia Guerreiro</strong>
+             <br>
+             <a href="painel.html" class="link-admin">Admin</a>
             </p>
     </footer>
+
+    <script>
+    (function() {
+        var FIREBASE_URL = 'https://joaquim-news-default-rtdb.firebaseio.com/noticias';
+
+        fetch(FIREBASE_URL + '.json')
+            .then(function(r) { return r.json(); })
+            .then(function(dados) {
+                if (!dados) return;
+
+                var main    = document.querySelector('main');
+                var primeiro = main.firstChild;
+
+                var entradas = Object.entries(dados).sort(function(a, b) {
+                    return b[1].data.localeCompare(a[1].data);
+                });
+
+                entradas.forEach(function(entrada) {
+                    var chave   = entrada[0];
+                    var noticia = entrada[1];
+                    var href    = 'noticia.html?id=' + chave;
+                    var img     = noticia.capa
+                        ? '<img src="' + noticia.capa + '" alt="Capa da notícia" style="max-width:100%; height:auto;">'
+                        : '';
+
+                    var art = document.createElement('article');
+                    art.className = 'noti';
+                    art.innerHTML =
+                        '<div class="notirig">' +
+                            '<p style="font-weight:700;"><a href="' + href + '">' + noticia.titulo + '</a></p>' +
+                            '<a href="' + href + '">' + img + '</a>' +
+                        '</div>';
+
+                    main.insertBefore(art, primeiro);
+                });
+            })
+            .catch(function() {});
+    })();
+    </script>
 </body>
 </html>
