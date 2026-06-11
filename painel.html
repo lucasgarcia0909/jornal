@@ -94,6 +94,17 @@
                     </select>
                 </div>
 
+                <!-- Autores -->
+                <div class="campo-form">
+                    <label>Quem escreveu essa notícia?</label>
+                    <div id="area-autores">
+                        <div class="bloco-conteudo" style="margin-bottom:8px;">
+                            <input type="text" placeholder="Nome do autor" style="width:100%; padding:8px 10px; border:1.5px solid #2a467a; border-radius:4px; font-family:Arial,sans-serif; font-size:14px; color:#2a467a; box-sizing:border-box; background-color:white;">
+                        </div>
+                    </div>
+                    <button class="btn-secundario" id="btn-add-autor" type="button" style="margin-top:4px;">+ Adicionar membro</button>
+                </div>
+
                 <!-- Blocos dinâmicos -->
                 <div id="area-blocos"></div>
 
@@ -226,6 +237,21 @@
         btnAddTexto.addEventListener('click',  criarBlocoTexto);
         btnAddImagem.addEventListener('click', criarBlocoImagem);
 
+        // ── AUTORES ───────────────────────────────────────────
+        var areaAutores  = document.getElementById('area-autores');
+        var btnAddAutor  = document.getElementById('btn-add-autor');
+
+        btnAddAutor.addEventListener('click', function() {
+            var bloco = document.createElement('div');
+            bloco.className = 'bloco-conteudo';
+            bloco.style.marginBottom = '8px';
+            bloco.innerHTML =
+                '<button class="btn-remover-bloco" type="button">&times;</button>' +
+                '<input type="text" placeholder="Nome do autor" style="width:100%; padding:8px 10px; border:1.5px solid #2a467a; border-radius:4px; font-family:Arial,sans-serif; font-size:14px; color:#2a467a; box-sizing:border-box; background-color:white;">';
+            bloco.querySelector('.btn-remover-bloco').addEventListener('click', function() { bloco.remove(); });
+            areaAutores.appendChild(bloco);
+        });
+
         // ── BASE64 ────────────────────────────────────────────
         function lerBase64(file) {
             return new Promise(function(resolve, reject) {
@@ -276,7 +302,11 @@
 
                 var hoje    = new Date();
                 var dataStr = hoje.toISOString().slice(0, 10);
-                var noticia = { titulo: titulo, categoria: categoria, capa: capaBase64 || '', blocos: blocos, data: dataStr };
+                var autores = Array.from(areaAutores.querySelectorAll('input[type="text"]'))
+                    .map(function(i) { return i.value.trim(); })
+                    .filter(function(v) { return v !== ''; });
+
+                var noticia = { titulo: titulo, categoria: categoria, capa: capaBase64 || '', blocos: blocos, autores: autores, data: dataStr };
 
                 var res = await fetch(FIREBASE_URL + '.json', {
                     method:  'POST',
@@ -289,10 +319,14 @@
                 msgSucesso.style.display = 'block';
                 setTimeout(function() { msgSucesso.style.display = 'none'; }, 3000);
 
-                inputTitulo.value      = '';
-                inputCategoria.value   = '';
-                inputCapa.value        = '';
-                areaBlocos.innerHTML   = '';
+                inputTitulo.value    = '';
+                inputCategoria.value = '';
+                inputCapa.value      = '';
+                areaBlocos.innerHTML = '';
+                areaAutores.innerHTML =
+                    '<div class="bloco-conteudo" style="margin-bottom:8px;">' +
+                        '<input type="text" placeholder="Nome do autor" style="width:100%; padding:8px 10px; border:1.5px solid #2a467a; border-radius:4px; font-family:Arial,sans-serif; font-size:14px; color:#2a467a; box-sizing:border-box; background-color:white;">' +
+                    '</div>';
                 await renderizarLista();
 
             } catch (err) {

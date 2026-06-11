@@ -100,6 +100,16 @@
                     });
                 }
 
+                if (noticia.autores && noticia.autores.length > 0) {
+                    var nomes;
+                    if (noticia.autores.length === 1) {
+                        nomes = noticia.autores[0];
+                    } else {
+                        nomes = noticia.autores.slice(0, -1).join(', ') + ' e ' + noticia.autores[noticia.autores.length - 1];
+                    }
+                    html += '<p class="creditos">Matéria escrita por: ' + escapeHtml(nomes) + '</p>';
+                }
+
                 artigo.innerHTML = html;
 
             } catch (err) {
