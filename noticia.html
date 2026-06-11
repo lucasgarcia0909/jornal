@@ -90,11 +90,7 @@
 
                 var html = '';
 
-                if (noticia.capa) {
-                    html += '<img src="' + noticia.capa + '" alt="Capa da notícia" style="max-width:100%; height:auto;">';
-                }
-
-if (noticia.blocos && noticia.blocos.length > 0) {
+                if (noticia.blocos && noticia.blocos.length > 0) {
                     noticia.blocos.forEach(function(bloco) {
                         if (bloco.tipo === 'texto') {
                             html += '<p>' + escapeHtml(bloco.conteudo) + '</p>';
