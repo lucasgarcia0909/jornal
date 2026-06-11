@@ -96,7 +96,7 @@
                 var primeiro = main.firstChild;
 
                 var entradas = Object.entries(dados).sort(function(a, b) {
-                    return b[1].data.localeCompare(a[1].data);
+                    return b[0].localeCompare(a[0]);
                 });
 
                 entradas.forEach(function(entrada) {

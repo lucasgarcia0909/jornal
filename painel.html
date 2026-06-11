@@ -7,6 +7,11 @@
     <title>Painel Admin — Joaquim News</title>
     <link rel="stylesheet" href="estilos/estilo001.css">
     <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            background-color: white;
+        }
+    </style>
 </head>
 <body>
 
@@ -293,7 +298,7 @@
                 }
 
                 var entradas = Object.entries(dados).sort(function(a, b) {
-                    return b[1].data.localeCompare(a[1].data);
+                    return b[0].localeCompare(a[0]);
                 });
 
                 entradas.forEach(function(entrada) {
