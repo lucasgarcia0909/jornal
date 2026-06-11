@@ -42,15 +42,7 @@
     </main>
 
     <footer>
-        <p id="creditos-noticia" class="creditos" style="display:none;"></p>
-        <p>&copy; 2026 E.M "Prefeito Joaquim Pires Sobrinho"
-            <br>
-            WHATSAPP: <a id="itel" href="https://wa.me/551931997546" target="_blank"><strong>(19) 3199-7546</strong></a>
-            <br>
-            EMAIL: <a href="mailto:contato@joaquimnews.com.br"><strong>contato@joaquimnews.com.br</strong></a>
-            <br>
-            Site desenvolvido por <strong>Lucas Garcia Guerreiro</strong>
-        </p>
+        <p id="creditos-noticia" class="creditos"></p>
     </footer>
 
     <script>
@@ -110,9 +102,7 @@
                     } else {
                         nomes = noticia.autores.slice(0, -1).join(', ') + ' e ' + noticia.autores[noticia.autores.length - 1];
                     }
-                    var creditos = document.getElementById('creditos-noticia');
-                    creditos.textContent  = 'Matéria escrita por: ' + nomes;
-                    creditos.style.display = '';
+                    document.getElementById('creditos-noticia').textContent = 'Matéria escrita por: ' + nomes;
                 }
 
             } catch (err) {
