@@ -42,6 +42,7 @@
     </main>
 
     <footer>
+        <p id="creditos-noticia" class="creditos" style="display:none;"></p>
         <p>&copy; 2026 E.M "Prefeito Joaquim Pires Sobrinho"
             <br>
             WHATSAPP: <a id="itel" href="https://wa.me/551931997546" target="_blank"><strong>(19) 3199-7546</strong></a>
@@ -100,6 +101,8 @@
                     });
                 }
 
+                artigo.innerHTML = html;
+
                 if (noticia.autores && noticia.autores.length > 0) {
                     var nomes;
                     if (noticia.autores.length === 1) {
@@ -107,10 +110,10 @@
                     } else {
                         nomes = noticia.autores.slice(0, -1).join(', ') + ' e ' + noticia.autores[noticia.autores.length - 1];
                     }
-                    html += '<p class="creditos">Matéria escrita por: ' + escapeHtml(nomes) + '</p>';
+                    var creditos = document.getElementById('creditos-noticia');
+                    creditos.textContent  = 'Matéria escrita por: ' + nomes;
+                    creditos.style.display = '';
                 }
-
-                artigo.innerHTML = html;
 
             } catch (err) {
                 header.textContent = 'Erro ao carregar';
