@@ -88,9 +88,8 @@ a#tel {
     text-shadow: none;
 }
 
-/*Mudar a cor para #95a2b8 quando houver notícias*/
 body {
-    background-color: white;
+    background-color: #95a2b8;
     margin: 0px;
 }
 
@@ -106,7 +105,6 @@ main p {
     max-width: 600px;
     padding: 0px 20px 0px 20px;
     font-family: var(--fontemainp);
-    font-weight: 700;
     margin: auto; 
     font-size: clamp(2vw, 2.5vh, 3vh);
     color: var(--mainp);
@@ -122,7 +120,6 @@ article > p {
     text-decoration: none;
     padding: 0px 20px 0px 20px;
     font-family: var(--fontemainp);
-    font-weight: 700;
     margin: auto; 
     font-size: clamp(2vw, 2.5vh, 3vh);
     color: black;
@@ -133,11 +130,10 @@ article > p > a {
     max-width: 600px;
     text-decoration: none;
     padding: 0px 20px 0px 20px;
-    font-family: black;
-    font-weight: 700;
+    font-family: var(--fontemainp);
     margin: auto; 
     font-size: clamp(2vw, 2.5vh, 3vh);
-    color: var(--articlepa);
+    color: #2a467a;
 }
 
 article > p > a:hover {
@@ -191,6 +187,35 @@ footer a:hover {
 p.aviso {
     color: #2a467a;
     padding-top: 100px;
+}
+
+.notirig {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
+.notirig > p > a {
+    text-align: center;
+    max-width: 600px;
+    text-decoration: none;
+    padding: 0px 20px 0px 20px;
+    margin: auto;
+    font-size: clamp(2vw, 2.5vh, 3vh);
+    color: #2a467a;
+}
+
+.notirig > p > a:hover {
+    color: #182744;
+}
+
+@media (max-width: 900px) {
+    .notirig {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
 }
 
 @media (prefers-color-scheme: dark) {

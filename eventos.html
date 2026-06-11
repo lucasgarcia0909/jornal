@@ -33,18 +33,50 @@
     </p>
     </nav>
     <main>
-        <article id="noti001">   
-             <p>
-                <a href="noti001.html">Dia das mulheres: <br> Conheça a história e algumas mulheres que revolucionaram o mundo</a>
-            </p>
-                    <a href="noti001.html">
-                        <picture>
-                            <source media="(max-width: 550px)" srcset="imagens/capadiamulheres300.png" type="image/png">
-                            <source media="(max-width: 700px)" srcset="imagens/capadiamulheres500.png" type="image/png">
-                            <img src="imagens/capadiamulheres650.png" alt="Capa reportagem sobre dia das mulheres">
-                        </picture>
-                    </a>
-            </article>
+        <article id="sem-noticias">
+            <p class="aviso">Ainda não existe nenhuma matéria sobre Eventos <br> :(</p>
+        </article>
     </main>
+
+    <script>
+    (function() {
+        var FIREBASE_URL = 'https://joaquim-news-default-rtdb.firebaseio.com/noticias';
+        var CATEGORIA    = 'eventos';
+
+        fetch(FIREBASE_URL + '.json')
+            .then(function(r) { return r.json(); })
+            .then(function(dados) {
+                if (!dados) return;
+
+                var entradas = Object.entries(dados)
+                    .filter(function(e) { return e[1].categoria === CATEGORIA; })
+                    .sort(function(a, b) { return b[0].localeCompare(a[0]); });
+
+                if (entradas.length === 0) return;
+
+                document.getElementById('sem-noticias').style.display = 'none';
+                var main = document.querySelector('main');
+
+                entradas.forEach(function(entrada) {
+                    var chave   = entrada[0];
+                    var noticia = entrada[1];
+                    var href    = 'noticia.html?id=' + chave;
+                    var img     = noticia.capa
+                        ? '<img src="' + noticia.capa + '" alt="Capa" style="max-width:100%;height:auto;">'
+                        : '';
+
+                    var art = document.createElement('article');
+                    art.className = 'noti';
+                    art.innerHTML =
+                        '<div class="notirig">' +
+                            '<p style="font-weight:700;"><a href="' + href + '">' + noticia.titulo + '</a></p>' +
+                            '<a href="' + href + '">' + img + '</a>' +
+                        '</div>';
+                    main.appendChild(art);
+                });
+            })
+            .catch(function() {});
+    })();
+    </script>
 </body>
 </html>

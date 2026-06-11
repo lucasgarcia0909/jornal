@@ -82,6 +82,18 @@
                     <small style="font-family:Arial,sans-serif; font-size:12px; color:#95a2b8;">Recomenda-se usar imagens comprimidas (menor que 500KB)</small>
                 </div>
 
+                <!-- Categoria -->
+                <div class="campo-form">
+                    <label for="input-categoria">Categoria</label>
+                    <select id="input-categoria" style="width:100%; padding:9px 12px; border:1.5px solid #2a467a; border-radius:5px; font-family:Arial,sans-serif; font-size:14px; color:#2a467a; box-sizing:border-box; background-color:white;">
+                        <option value="">Selecione uma categoria</option>
+                        <option value="esportes">Esportes</option>
+                        <option value="cultura">Cultura</option>
+                        <option value="eventos">Eventos</option>
+                        <option value="escola">Escola</option>
+                    </select>
+                </div>
+
                 <!-- Blocos dinâmicos -->
                 <div id="area-blocos"></div>
 
@@ -129,8 +141,9 @@
         const inputSenha   = document.getElementById('input-senha');
         const btnEntrar    = document.getElementById('btn-entrar');
         const btnSair      = document.getElementById('btn-sair');
-        const inputTitulo  = document.getElementById('input-titulo');
-        const inputCapa    = document.getElementById('input-capa');
+        const inputTitulo    = document.getElementById('input-titulo');
+        const inputCategoria = document.getElementById('input-categoria');
+        const inputCapa      = document.getElementById('input-capa');
         const areaBlocos   = document.getElementById('area-blocos');
         const btnAddTexto  = document.getElementById('btn-add-texto');
         const btnAddImagem = document.getElementById('btn-add-imagem');
@@ -226,10 +239,16 @@
 
         // ── PUBLICAR ──────────────────────────────────────────
         btnPublicar.addEventListener('click', async function() {
-            var titulo = inputTitulo.value.trim();
+            var titulo    = inputTitulo.value.trim();
+            var categoria = inputCategoria.value;
             if (!titulo) {
                 alert('Por favor, adicione um título à notícia.');
                 inputTitulo.focus();
+                return;
+            }
+            if (!categoria) {
+                alert('Por favor, selecione uma categoria.');
+                inputCategoria.focus();
                 return;
             }
 
@@ -257,7 +276,7 @@
 
                 var hoje    = new Date();
                 var dataStr = hoje.toISOString().slice(0, 10);
-                var noticia = { titulo: titulo, capa: capaBase64 || '', blocos: blocos, data: dataStr };
+                var noticia = { titulo: titulo, categoria: categoria, capa: capaBase64 || '', blocos: blocos, data: dataStr };
 
                 var res = await fetch(FIREBASE_URL + '.json', {
                     method:  'POST',
@@ -270,9 +289,10 @@
                 msgSucesso.style.display = 'block';
                 setTimeout(function() { msgSucesso.style.display = 'none'; }, 3000);
 
-                inputTitulo.value    = '';
-                inputCapa.value      = '';
-                areaBlocos.innerHTML = '';
+                inputTitulo.value      = '';
+                inputCategoria.value   = '';
+                inputCapa.value        = '';
+                areaBlocos.innerHTML   = '';
                 await renderizarLista();
 
             } catch (err) {
