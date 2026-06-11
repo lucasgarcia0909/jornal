@@ -89,14 +89,18 @@ a#tel {
 }
 
 body {
-    background-color: #95a2b8;
+    background-color: white;
     margin: 0px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 main {
     background-color: white;
     border-radius: 5px;
     margin: auto;
+    flex: 1;
 }
 
 main p {
