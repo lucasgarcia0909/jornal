@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>Joaquim News</title>
+    <link rel="stylesheet" href="estilos/estilo001.css">
+    <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+    <header>
+        <h1 id="noticia-titulo-header">Carregando...</h1>
+        <div class="logo">
+            <picture>
+                <source media="(max-width: 500px)" srcset="imagens/logo70.png" type="image/png">
+                <img src="imagens/logo.png" alt="Logo do Joaquim News">
+            </picture>
+        </div>
+    </header>
+
+    <nav>
+        <p>
+            <a href="index.html">Home</a>
+            /
+            <a href="esportes.html">Esportes</a>
+            /
+            <a href="cultura.html">Cultura</a>
+            /
+            <a href="eventos.html">Eventos</a>
+            /
+            <a href="escola.html">Escola</a>
+            /
+            <a href="sobrenos.html">Sobre nós</a>
+        </p>
+    </nav>
+
+    <main>
+        <article id="noticia-conteudo">
+        </article>
+    </main>
+
+    <footer>
+        <p id="creditos-noticia" class="creditos"></p>
+    </footer>
+
+    <script>
+        var FIREBASE_URL = 'https://joaquim-news-default-rtdb.firebaseio.com/noticias';
+
+        function escapeHtml(str) {
+            var div = document.createElement('div');
+            div.appendChild(document.createTextNode(str));
+            return div.innerHTML;
+        }
+
+        async function renderizarNoticia() {
+            var params  = new URLSearchParams(window.location.search);
+            var id      = params.get('id');
+            var header  = document.getElementById('noticia-titulo-header');
+            var artigo  = document.getElementById('noticia-conteudo');
+
+            if (!id) {
+                header.textContent = 'Notícia não encontrada';
+                artigo.innerHTML   = '<p>Nenhum ID de notícia foi fornecido. <a href="index.html">Voltar à Home</a></p>';
+                document.title     = 'Não encontrada — Joaquim News';
+                return;
+            }
+
+            try {
+                var res     = await fetch(FIREBASE_URL + '/' + id + '.json');
+                var noticia = await res.json();
+
+                if (!noticia) {
+                    header.textContent = 'Notícia não encontrada';
+                    artigo.innerHTML   = '<p>Esta notícia não existe ou foi removida. <a href="index.html">Voltar à Home</a></p>';
+                    document.title     = 'Não encontrada — Joaquim News';
+                    return;
+                }
+
+                document.title     = noticia.titulo + ' — Joaquim News';
+                header.textContent = noticia.titulo;
+
+                var html = '';
+
+                if (noticia.blocos && noticia.blocos.length > 0) {
+                    noticia.blocos.forEach(function(bloco) {
+                        if (bloco.tipo === 'texto') {
+                            html += '<p>' + escapeHtml(bloco.conteudo) + '</p>';
+                        } else if (bloco.tipo === 'imagem' && bloco.conteudo) {
+                            html += '<img src="' + bloco.conteudo + '" alt="" style="max-width:100%; height:auto;">';
+                        }
+                    });
+                }
+
+                artigo.innerHTML = html;
+
+                if (noticia.autores && noticia.autores.length > 0) {
+                    var nomes;
+                    if (noticia.autores.length === 1) {
+                        nomes = noticia.autores[0];
+                    } else {
+                        nomes = noticia.autores.slice(0, -1).join(', ') + ' e ' + noticia.autores[noticia.autores.length - 1];
+                    }
+                    document.getElementById('creditos-noticia').textContent = 'Matéria escrita por: ' + nomes;
+                }
+
+            } catch (err) {
+                header.textContent = 'Erro ao carregar';
+                artigo.innerHTML   = '<p>Não foi possível carregar a notícia. Verifique sua conexão. <a href="index.html">Voltar à Home</a></p>';
+            }
+        }
+
+        renderizarNoticia();
+    </script>
+
+</body>
+</html>
